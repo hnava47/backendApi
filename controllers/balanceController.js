@@ -1,10 +1,13 @@
-const { Balance } = require('../models');
+const { Balance, Period } = require('../models');
 
 module.exports = {
   viewAllBalances: async (req, res) => {
     try {
       const allBalance = await Balance.findAll({
         where: req.query.period ? { accountingPeriod: req.query.period } : null,
+        // include: {
+        //   model: Period,
+        // },
       });
 
       res.json(allBalance);
