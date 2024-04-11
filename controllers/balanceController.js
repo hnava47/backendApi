@@ -5,9 +5,9 @@ module.exports = {
     try {
       const allBalance = await Balance.findAll({
         where: req.query.period ? { accountingPeriod: req.query.period } : null,
-        // include: {
-        //   model: Period,
-        // },
+        include: {
+          model: Period,
+        },
       });
 
       res.json(allBalance);
@@ -44,7 +44,7 @@ module.exports = {
         beginningBalance: prevBalance.endingBalance,
       });
 
-      res.json(newBalance);
+      res.json({message: 'yay!'});
     } catch (error) {
       res.json(error);
     }
